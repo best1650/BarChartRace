@@ -27,6 +27,7 @@ def draw_barchart(year):
         'Africa':'#eafb50'
     }
 
+    # Name and continental merge
     group_lk = df.set_index('name')['group'].to_dict()
 
     # Add X and Y data
@@ -38,15 +39,37 @@ def draw_barchart(year):
         ax.text(value-dx, i-.25, group_lk[name], size=10, color='#444444', ha='right', va='baseline')
         ax.text(value+dx, i,     f'{value:,.0f}',  size=14, ha='left',  va='center')
 
-    # Text location
+    # Add year in the right side
     ax.text(1, 0.4, year, transform=ax.transAxes, size=46, ha='right')
 
+    # Add topic
+    ax.text(0, 1.06, 'Population (thousands)', transform=ax.transAxes, size=12, color='#777777')
+
+    # Show the different tick formatters.
+    ax.xaxis.set_major_formatter(ticker.StrMethodFormatter('{x:,.0f}'))
+
+    # Put x axis on the top bar
+    ax.xaxis.set_ticks_position('top')
+
+    # X axis tick style
+    ax.tick_params(axis='x', colors='#777777', labelsize=13)
+
+    # ax.grid(which='major', axis='x', linestyle='-')
+
+    ax.set_axisbelow(True)
+
+    ax.text(0, 1.12, 'The most populous cities in the world from 1500 to 2018',
+            transform=ax.transAxes, size=24, weight=600, ha='left')
+    ax.text(1, 0, 'by @pratapvardhan; credit @jburnmurdoch', transform=ax.transAxes, ha='right',
+            color='#777777', bbox=dict(facecolor='white', alpha=0.8, edgecolor='white'))
+
+    # insert image
+    # https://www.science-emergence.com/Articles/How-to-insert-an-image-a-picture-or-a-photo-in-a-matplotlib-figure/
+    
     plt.box(False)
 
 if __name__ == "__main__":
     animator = animation.FuncAnimation(fig, draw_barchart, frames=range(1968, 2019))
-
-
     # Display chart
     plt.show()
 
