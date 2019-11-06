@@ -1,0 +1,12 @@
+git clone
+
+git pull origin master
+
+git config --global user.name 
+git config --global user.password
+git add -A
+git commit -m "some message"
+git push origin master
+
+
+
